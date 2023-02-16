@@ -42,6 +42,8 @@
     "jsx-a11y/control-has-associated-label": "off",
     "no-underscore-dangle": "off",
     "array-callback-return": "off",
+    "default-param-last": "off",
+    "no-unneeded-ternary": "off",
     "import/order": [
       2,
       {
