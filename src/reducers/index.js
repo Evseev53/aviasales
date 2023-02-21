@@ -1,72 +1,128 @@
 import { combineReducers } from 'redux';
 
-const ALL = 'ALL';
-const NON_STOP = 'NON_STOP';
-const ONE_STOP = 'ONE_STOP';
-const TWO_STOP = 'TWO_STOP';
-const THREE_STOP = 'THREE_STOP';
+import {
+  ALL,
+  NON_STOP,
+  ONE_STOP,
+  TWO_STOP,
+  THREE_STOP,
+  ADD_TICKETS,
+  TOGGLE_STOP_LOADING,
+  SEARCH_ID,
+  ADD_FIVE_TICKETS,
+  BY_SPEED,
+  BY_PRICE,
+  UPDATE_ID,
+} from '../actions';
 
-
-const defaultState = {
+const defaultStateFilters = {
   all: true,
   nonStop: false,
   oneStop: true,
   twoStop: true,
-  threeStop: true
+  threeStop: true,
 };
 
-const filters = (state = defaultState, action) => {
-  switch (action.type){
-  case ALL:
-    return {
-      all: action.payload,
-      nonStop: false,
-      oneStop: action.payload,
-      twoStop: action.payload,
-      threeStop: action.payload
-    }
-  case NON_STOP:
-    return {
-      all: false,
-      nonStop: action.payload,
-      oneStop: false,
-      twoStop: false,
-      threeStop: false
-    }
-  case ONE_STOP:
-    return {
-      ...state,
-      all: action.payload === true && state.twoStop === true && state.threeStop === true ? true : false,
-      nonStop: false,
-      oneStop: action.payload
-    }
+const filters = (state = defaultStateFilters, action) => {
+  switch (action.type) {
+    case ALL:
+      return {
+        all: action.payload,
+        nonStop: false,
+        oneStop: action.payload,
+        twoStop: action.payload,
+        threeStop: action.payload,
+      };
+    case NON_STOP:
+      return {
+        all: false,
+        nonStop: action.payload,
+        oneStop: false,
+        twoStop: false,
+        threeStop: false,
+      };
+    case ONE_STOP:
+      return {
+        ...state,
+        all: action.payload === true && state.twoStop === true && state.threeStop === true ? true : false,
+        nonStop: false,
+        oneStop: action.payload,
+      };
 
-  case TWO_STOP:
-    return {
-      ...state,
-      all: action.payload === true && state.oneStop === true && state.threeStop === true ? true : false,
-      nonStop: false,
-      twoStop: action.payload
-    }
+    case TWO_STOP:
+      return {
+        ...state,
+        all: action.payload === true && state.oneStop === true && state.threeStop === true ? true : false,
+        nonStop: false,
+        twoStop: action.payload,
+      };
 
-  case THREE_STOP:
-    return {
-      ...state,
-      all: action.payload === true && state.oneStop === true && state.twoStop === true ? true : false,
-      nonStop: false,
-      threeStop: action.payload
-    }
+    case THREE_STOP:
+      return {
+        ...state,
+        all: action.payload === true && state.oneStop === true && state.twoStop === true ? true : false,
+        nonStop: false,
+        threeStop: action.payload,
+      };
 
-  default: return state
+    default:
+      return state;
   }
 };
 
-export const rootReducer = combineReducers({
-  filters
-})
+const tickets = (state = [], action) => {
+  if (action.type === ADD_TICKETS) {
+    return [...state, ...action.payload];
+  }
+  return state;
+};
 
-export const addAllFilter = (payload) => ({ type: ALL, payload })
-export const addNonStopFilter = (payload) => ({ type: NON_STOP, payload })
-export const addOneStopFilter = (payload) => ({ type: ONE_STOP, payload })
-export const addTwoStopFilter = (payload) => ({ type: TWO_STOP, payload })
-export const addThreeStopFilter = (payload) => ({ type: THREE_STOP, payload })
+const loading = (state = { stop: false }, action) => {
+  if (action.type === TOGGLE_STOP_LOADING) {
+    return { stop: action.payload };
+  }
+  return state;
+};
+
+const searchId = (state = null, action) => {
+  if (action.type === SEARCH_ID) {
+    return action.payload;
+  }
+  return state;
+};
+
+const numOfVisible = (state = 5, action) => {
+  if (action.type === ADD_FIVE_TICKETS) {
+    return state + 5;
+  }
+  return state;
+};
+
+const sortTickets = (state = 'byPrice', action) => {
+  if (action.type === BY_PRICE) {
+    return 'byPrice';
+  }
+  if (action.type === BY_SPEED) {
+    return 'bySpeed';
+  }
+  return state;
+};
+
+const maxID = (state = 0, action) => {
+  if (action.type === UPDATE_ID) {
+    return action.payload;
+  }
+  return state;
+};
+
+const rootReducer = combineReducers({
+  filters,
+  tickets,
+  loading,
+  searchId,
+  numOfVisible,
+  sortTickets,
+  maxID,
+});
+
+export default rootReducer;

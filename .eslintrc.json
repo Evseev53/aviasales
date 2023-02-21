@@ -44,6 +44,7 @@
     "array-callback-return": "off",
     "default-param-last": "off",
     "no-unneeded-ternary": "off",
+    "no-unused-expressions": "off",
     "import/order": [
       2,
       {

@@ -1,0 +1,103 @@
+@import '../../variables';
+
+@keyframes ldio-bd2lvfgud0u {
+  0% {
+    transform: translate(6px, 40px) scale(0);
+  }
+  25% {
+    transform: translate(6px, 40px) scale(0);
+  }
+  50% {
+    transform: translate(6px, 40px) scale(1);
+  }
+  75% {
+    transform: translate(40px, 40px) scale(1);
+  }
+  100% {
+    transform: translate(74px, 40px) scale(1);
+  }
+}
+
+@keyframes ldio-bd2lvfgud0u-r {
+  0% {
+    transform: translate(74px, 40px) scale(1);
+  }
+  100% {
+    transform: translate(74px, 40px) scale(0);
+  }
+}
+
+@keyframes ldio-bd2lvfgud0u-c {
+  0% {
+    background: $clr-basic;
+  }
+  25% {
+    background: $clr-basic;
+  }
+  50% {
+    background: $clr-basic;
+  }
+  75% {
+    background: $clr-basic;
+  }
+  100% {
+    background: $clr-basic;
+  }
+}
+
+.ldio-bd2lvfgud0u div {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transform: translate(40px, 40px) scale(1);
+  background: $clr-basic;
+  animation: ldio-bd2lvfgud0u 1s infinite cubic-bezier(0, 0.5, 0.5, 1);
+}
+
+.ldio-bd2lvfgud0u div:nth-child(1) {
+  background: $clr-basic;
+  transform: translate(74px, 40px) scale(1);
+  animation: ldio-bd2lvfgud0u-r 0.25s infinite cubic-bezier(0, 0.5, 0.5, 1), ldio-bd2lvfgud0u-c 1s infinite step-start;
+}
+
+.ldio-bd2lvfgud0u div:nth-child(2) {
+  animation-delay: -0.25s;
+  background: $clr-basic;
+}
+
+.ldio-bd2lvfgud0u div:nth-child(3) {
+  animation-delay: -0.5s;
+  background: $clr-basic;
+}
+
+.ldio-bd2lvfgud0u div:nth-child(4) {
+  animation-delay: -0.75s;
+  background: $clr-basic;
+}
+
+.ldio-bd2lvfgud0u div:nth-child(5) {
+  animation-delay: -1s;
+  background: $clr-basic;
+}
+
+.loadingio-spinner-ellipsis-x0qh9lymrtl {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  overflow: hidden;
+  background: none;
+}
+
+.ldio-bd2lvfgud0u {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(0.5);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+}
+
+.ldio-bd2lvfgud0u div {
+  box-sizing: content-box;
+}
