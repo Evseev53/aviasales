@@ -48,7 +48,6 @@ const filters = (state = defaultStateFilters, action) => {
         nonStop: false,
         oneStop: action.payload,
       };
-
     case TWO_STOP:
       return {
         ...state,
@@ -56,7 +55,6 @@ const filters = (state = defaultStateFilters, action) => {
         nonStop: false,
         twoStop: action.payload,
       };
-
     case THREE_STOP:
       return {
         ...state,
@@ -64,7 +62,6 @@ const filters = (state = defaultStateFilters, action) => {
         nonStop: false,
         threeStop: action.payload,
       };
-
     default:
       return state;
   }

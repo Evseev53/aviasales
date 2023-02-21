@@ -1,8 +1,8 @@
 
 {
   "*.js": [
-    "prettier --write",
-    "eslint"
+    "eslint",
+    "prettier --write"
   ],
   "*.html": [
     "eslint",
