@@ -21,6 +21,8 @@ export const BY_SPEED = 'BY_SPEED';
 
 export const UPDATE_ID = 'UPDATE_ID';
 
+export const ERROR = 'ERROR';
+
 export const addAllFilter = (payload) => ({ type: ALL, payload });
 export const addNonStopFilter = (payload) => ({ type: NON_STOP, payload });
 export const addOneStopFilter = (payload) => ({ type: ONE_STOP, payload });
@@ -33,6 +35,7 @@ export const addFiveTickets = (payload) => ({ type: ADD_FIVE_TICKETS, payload })
 export const sortByPrice = (payload) => ({ type: BY_PRICE, payload });
 export const sortBySpeed = (payload) => ({ type: BY_SPEED, payload });
 export const updateMaxId = (payload) => ({ type: UPDATE_ID, payload });
+export const onError = (payload) => ({ type: ERROR, payload });
 
 export const fetchTickets = (idSearch, maxID) => {
   return (dispatch) => {

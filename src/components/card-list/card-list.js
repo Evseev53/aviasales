@@ -7,7 +7,7 @@ import { addFiveTickets, sortByPrice, sortBySpeed, updateMaxId } from '../../act
 import classes from './card-list.module.scss';
 
 export default function CardList() {
-  const { tickets, filters, loading, numOfVisible, sortTickets } = useSelector((state) => state);
+  const { tickets, filters, loading, numOfVisible, sortTickets, error } = useSelector((state) => state);
 
   const dispatch = useDispatch();
 
@@ -103,6 +103,16 @@ export default function CardList() {
 
   const message = <div className={classes.message}>Рейсов, подходящих под заданные фильтры, не найдено</div>;
 
+  const showMoreButton = (
+    <button
+      className={`${classes.button} ${classes['button-selected']} ${classes['button-xl']}`}
+      onClick={onShowFive}
+      type="button"
+    >
+      <span className={`${classes.title} ${classes['title-selected']}`}>Показать еще пять билетов</span>
+    </button>
+  );
+
   return (
     <div className={classes.cards}>
       <div className={classes['buttons-sort']}>
@@ -116,24 +126,25 @@ export default function CardList() {
             Самый дешевый
           </span>
         </button>
-        <button className={`${classes.button} ${classes[speed]}`} id="speed" onClick={onSort} type="button">
+        <button
+          className={`${classes.button} ${classes[speed]} ${classes['button-right']}`}
+          id="speed"
+          onClick={onSort}
+          type="button"
+        >
           <span id="speed" className={`${classes.title} ${classes[speedTitle]}`}>
             Самый быстрый
           </span>
         </button>
-        <button className={`${classes.button} ${classes['button-right']}`} id="optimal" onClick={onSort} type="button">
-          <span className={classes.title}>Оптимальный</span>
-        </button>
       </div>
       <div className={classes.preloader}>{loading.stop ? null : <Preloader />}</div>
+      <div>
+        {error ? (
+          <p className={`${classes.message} ${classes.error}`}>Проверьте интернет соединение и обновите страницу.</p>
+        ) : null}
+      </div>
       <div>{ticketsList.length ? ticketsList : message}</div>
-      <button
-        className={`${classes.button} ${classes['button-selected']} ${classes['button-xl']}`}
-        onClick={onShowFive}
-        type="button"
-      >
-        <span className={`${classes.title} ${classes['title-selected']}`}>Показать еще пять билетов</span>
-      </button>
+      <div>{ticketsList.length ? showMoreButton : null}</div>
     </div>
   );
 }

@@ -13,11 +13,12 @@ import {
   BY_SPEED,
   BY_PRICE,
   UPDATE_ID,
+  ERROR,
 } from '../actions';
 
 const defaultStateFilters = {
   all: true,
-  nonStop: false,
+  nonStop: true,
   oneStop: true,
   twoStop: true,
   threeStop: true,
@@ -28,38 +29,45 @@ const filters = (state = defaultStateFilters, action) => {
     case ALL:
       return {
         all: action.payload,
-        nonStop: false,
+        nonStop: action.payload,
         oneStop: action.payload,
         twoStop: action.payload,
         threeStop: action.payload,
       };
     case NON_STOP:
       return {
-        all: false,
+        ...state,
+        all:
+          action.payload === true && state.oneStop === true && state.twoStop === true && state.threeStop === true
+            ? true
+            : false,
         nonStop: action.payload,
-        oneStop: false,
-        twoStop: false,
-        threeStop: false,
       };
     case ONE_STOP:
       return {
         ...state,
-        all: action.payload === true && state.twoStop === true && state.threeStop === true ? true : false,
-        nonStop: false,
+        all:
+          action.payload === true && state.nonStop === true && state.twoStop === true && state.threeStop === true
+            ? true
+            : false,
         oneStop: action.payload,
       };
     case TWO_STOP:
       return {
         ...state,
-        all: action.payload === true && state.oneStop === true && state.threeStop === true ? true : false,
-        nonStop: false,
+        all:
+          action.payload === true && state.nonStop === true && state.oneStop === true && state.threeStop === true
+            ? true
+            : false,
         twoStop: action.payload,
       };
     case THREE_STOP:
       return {
         ...state,
-        all: action.payload === true && state.oneStop === true && state.twoStop === true ? true : false,
-        nonStop: false,
+        all:
+          action.payload === true && state.nonStop === true && state.oneStop === true && state.twoStop === true
+            ? true
+            : false,
         threeStop: action.payload,
       };
     default:
@@ -112,6 +120,13 @@ const maxID = (state = 0, action) => {
   return state;
 };
 
+const error = (state = false, action) => {
+  if (action.type === ERROR) {
+    return action.payload;
+  }
+  return state;
+};
+
 const rootReducer = combineReducers({
   filters,
   tickets,
@@ -120,6 +135,7 @@ const rootReducer = combineReducers({
   numOfVisible,
   sortTickets,
   maxID,
+  error,
 });
 
 export default rootReducer;

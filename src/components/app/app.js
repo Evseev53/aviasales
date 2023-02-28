@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Form from '../form/form';
 import CardList from '../card-list/card-list';
-import { fetchTickets, fetchSearchId, updateMaxId } from '../../actions';
+import { fetchTickets, fetchSearchId, updateMaxId, toggleStopLoading, onError } from '../../actions';
 
 import classes from './app.module.scss';
 import logo from './logo.svg';
@@ -17,7 +17,10 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (!loading.stop && searchId) {
+    if (!window.navigator.onLine) {
+      dispatch(toggleStopLoading(true));
+      dispatch(onError(true));
+    } else if (!loading.stop && searchId) {
       dispatch(fetchTickets(searchId, maxID));
       dispatch(updateMaxId(tickets.length));
     }
